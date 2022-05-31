@@ -146,21 +146,10 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        // return $request->all();
-        // $avatar_path =  auth()->user()->avatar ?? "d.png";
-        // $pathinfo = pathinfo($avatar_path);
-        // $userAvatar = $pathinfo['filename'] . '.' . $pathinfo['extension'];
+
         $userAvatar = null;
         if ($request->hasFile('avatar')) {
-
-
-
-            // if ($userAvatar && $userAvatar != "avatar.jpg") {
-            //     Storage::delete('public/avatar/' . $userAvatar);
-            // }
-
             $file = $request->file("avatar");
-
             $giveAvatarName = time() . "-" . $file->getClientOriginalName();
             $file->move('public/avatar/', $giveAvatarName);
             $userAvatar = $giveAvatarName;
