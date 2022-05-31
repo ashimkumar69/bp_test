@@ -162,8 +162,7 @@ class UserController extends Controller
             $file = $request->file("avatar");
 
             $giveAvatarName = time() . "-" . $file->getClientOriginalName();
-            Storage::put($giveAvatarName, $file);
-            Storage::move($giveAvatarName, 'public/avatar/' . $giveAvatarName);
+            $file->move('public/avatar/', $giveAvatarName);
             $userAvatar = $giveAvatarName;
         }
 
