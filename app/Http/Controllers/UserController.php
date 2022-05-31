@@ -148,7 +148,21 @@ class UserController extends Controller
     {
 
         $userAvatar = null;
+        $avatar_path =  auth()->user()->avatar;
+
+        $pathinfo = pathinfo($avatar_path);
+
+        if ($pathinfo['filename'] && $pathinfo['extension']) {
+            $userAvatar = $pathinfo['filename'] . '.' . $pathinfo['extension'];
+        }
+
+
         if ($request->hasFile('avatar')) {
+
+            if (file_exists(public_path('avatar/' . $userAvatar))) {
+                unlink(public_path('avatar/' . $userAvatar));
+            }
+
             $file = $request->file("avatar");
             $giveAvatarName = time() . "-" . $file->getClientOriginalName();
             $file->move('public/avatar/', $giveAvatarName);

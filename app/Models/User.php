@@ -66,7 +66,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    protected $avatar = "/storage/avatar/";
+    protected $avatar = "/avatar/";
     public function getAvatarAttribute($upload)
     {
 
